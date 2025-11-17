@@ -7,6 +7,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
     exit;
 }
 
+
 if (isset($_GET['id'])) {
     $db = new Database();
     $conn = $db->connect();
