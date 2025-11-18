@@ -3,6 +3,7 @@ session_start();
 require_once __DIR__ . '/../classes/database.php';
 require_once __DIR__ . '/../classes/email.php';
 require_once __DIR__ . '/../classes/audit.php';
+require_once __DIR__ . '/../classes/Notification.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
     header("Location: login.php");
@@ -190,36 +191,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($pid) $stmt->execute([$schedule_id, $group_id, $pid, $role]);
                 }
 
+               
                 $conn->commit();
                 $message = '<div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-4 flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i><div><strong>Success!</strong> Panel assigned and schedule created for ' . htmlspecialchars($group_info['leader_name']) . '\'s group.</div></div>';
 
                 // Refresh assigned panel
                 $stmt = $conn->prepare("
-                    SELECT a.assignment_id, a.group_id, a.panelist_id, a.role, CONCAT(f.first_name, ' ', f.last_name) AS panelist_name, f.expertise, f.email
+                    SELECT a.assignment_id, a.group_id, a.panelist_id, a.role, 
+                           CONCAT(p.first_name, ' ', p.last_name) AS panelist_name, 
+                           p.expertise, p.email
                     FROM assignment a
-                    INNER JOIN faculty f ON a.panelist_id = f.panelist_id
+                    INNER JOIN panelist p ON a.panelist_id = p.panelist_id
                     WHERE a.group_id = ?
                 ");
                 $stmt->execute([$group_id]);
                 $assigned_panel = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Send email notifications
+                // ✅ SEND NOTIFICATIONS TO PANELISTS (In-System + Email)
                 try {
-                    $email = new email();
-                    $panelistEmails = array_column($assigned_panel, 'email');
-                    $groupInfo = [
-                        'group_name' => $group_info['leader_name'],
-                        'thesis_title' => $group_info['thesis_title']
-                    ];
-                    $scheduleInfo = [
-                        'date' => $schedule_date,
-                        'time' => $schedule_time,
-                        'end_time' => $schedule_end_time,
-                        'room' => $room
-                    ];
-                    $email->sendPanelAssignmentNotification($panelistEmails, $groupInfo, $scheduleInfo);
+                    $notification = new Notification();
+                    
+                    // Send notification to each panelist
+                    foreach ($assigned_panel as $member) {
+                        $notification->notifyPanelistAssignment(
+                            $member['panelist_id'],
+                            $member['email'],
+                            $group_info['leader_name'],
+                            $group_info['thesis_title'],
+                            $schedule_date,
+                            $schedule_time,
+                            $schedule_end_time,
+                            $room,
+                            $member['role'],
+                            $group_id
+                        );
+                    }
                 } catch (Exception $e) {
-                    // Email failed but assignment succeeded
+                    error_log("Notification error: " . $e->getMessage());
                 }
 
                 // Log audit action

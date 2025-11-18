@@ -1,7 +1,9 @@
 <?php
+// File: /THESIS/panelist/update_availability.php
 session_start();
 require_once __DIR__ . '/../classes/database.php';
 require_once __DIR__ . '/../classes/audit.php';
+require_once __DIR__ . '/../classes/Notification.php';
 
 if (!isset($_SESSION['panelist_id'])) {
     header("Location: ../app/login.php");
@@ -13,8 +15,8 @@ $conn = $db->connect();
 $panelist_id = $_SESSION['panelist_id'];
 $message = '';
 
-// Get panelist name for display
-$stmt = $conn->prepare("SELECT first_name, last_name FROM faculty WHERE panelist_id = ?");
+// Get panelist details
+$stmt = $conn->prepare("SELECT first_name, last_name, email FROM panelist WHERE panelist_id = ?");
 $stmt->execute([$panelist_id]);
 $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -49,20 +51,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $stmt = $conn->prepare("INSERT INTO availability (panelist_id, day, start_time, end_time) VALUES (?, ?, ?, ?)");
                 $stmt->execute([$panelist_id, $day, $start_time, $end_time]);
+                
+                $timeRange = date('g:i A', strtotime($start_time)) . ' - ' . date('g:i A', strtotime($end_time));
+                
                 $message = '<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-4 flex items-start gap-3">
                     <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-                    <div><strong>Success!</strong> Availability slot added for ' . htmlspecialchars($day) . ' from ' . date('g:i A', strtotime($start_time)) . ' to ' . date('g:i A', strtotime($end_time)) . '.</div>
+                    <div><strong>Success!</strong> Availability slot added for ' . htmlspecialchars($day) . ' from ' . $timeRange . '. Admin has been notified.</div>
                 </div>';
 
                 // Log audit action
                 $audit = new Audit();
                 $audit->logAction($panelist_id, 'Panelist', 'Add Availability', 'availability', $conn->lastInsertId(), "Added availability: $day $start_time - $end_time");
+                
+                // ✅ NOTIFY ADMIN - In-system + Email
+                try {
+                    $notification = new Notification();
+                    $panelistName = $panelist['first_name'] . ' ' . $panelist['last_name'];
+                    
+                    // In-system notification + Email notification
+                    $notification->notifyAdminAvailabilityUpdate(
+                        $panelist_id,
+                        $panelistName,
+                        $panelist['email'],
+                        $day,
+                        $timeRange
+                    );
+                } catch (Exception $e) {
+                    error_log("Notification failed: " . $e->getMessage());
+                }
             }
         }
     } elseif (isset($_POST['delete_slot'])) {
         $availability_id = $_POST['availability_id'];
         
-        // Get slot details before deletion for message
+        // Get slot details before deletion
         $stmt = $conn->prepare("SELECT day, start_time, end_time FROM availability WHERE availability_id = ? AND panelist_id = ?");
         $stmt->execute([$availability_id, $panelist_id]);
         $slot = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -88,7 +110,7 @@ $stmt = $conn->prepare("SELECT * FROM availability WHERE panelist_id = ? ORDER B
 $stmt->execute([$panelist_id]);
 $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Group by day for better display
+// Group by day
 $availability_by_day = [];
 foreach ($records as $r) {
     $availability_by_day[$r['day']][] = $r;
@@ -151,7 +173,7 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
       <i data-lucide="info" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
       <div class="text-sm text-blue-800">
         <p class="font-semibold mb-1">Set your weekly availability schedule</p>
-        <p>Your availability will be used by admins when assigning panel members to thesis defense schedules. Make sure to keep this updated!</p>
+        <p>Your availability will be used by admins when assigning panel members to thesis defense schedules. <strong>Admin will be notified when you update your availability.</strong></p>
       </div>
     </div>
   </div>
