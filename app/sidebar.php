@@ -59,6 +59,12 @@ if (!isset($_SESSION)) session_start();
             <p class="text-xs text-blue-200">Logged in as</p>
             <p class="font-semibold truncate"><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin User') ?></p>
         </div>
+        
+        <!-- Notification Bell -->
+        <div class="flex items-center justify-center mb-3">
+            <?php include __DIR__ . '/../classes/includes/notification_bell.php'; ?>
+        </div>
+        
         <a href="logout.php" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-red-600 transition bg-red-500">
             <i data-lucide="log-out" class="w-5 h-5"></i> Logout
         </a>

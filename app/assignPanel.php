@@ -224,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $room,
                             $member['role'],
                             $group_id
+                            
                         );
                     }
                 } catch (Exception $e) {
