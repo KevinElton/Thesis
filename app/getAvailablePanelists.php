@@ -38,6 +38,7 @@ $stmt = $conn->prepare("
     FROM faculty f
     LEFT JOIN availability a ON f.panelist_id = a.panelist_id AND a.day = DAYNAME(?)
     WHERE a.start_time <= ? AND a.end_time >= ?
+    
 ");
 $stmt->execute([$date, $start_time, $end_time]);
 $available_panelists = $stmt->fetchAll(PDO::FETCH_ASSOC);
