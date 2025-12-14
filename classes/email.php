@@ -76,7 +76,7 @@ class Email {
                 <p>Please ensure your availability for this schedule. If you have any conflicts, please contact the administrator immediately.</p>
                 
                 <p style='margin-top: 30px;'>
-                    <a href='http://localhost/Thesis/apps/login.php' 
+                    <a href='http://localhost/Thesis/auth/login.php' 
                        style='background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;'>
                         View in Dashboard
                     </a>
@@ -163,7 +163,7 @@ class Email {
             'title' => $subject,
             'body' => $bodyContent . "
                 <p style='margin-top: 30px;'>
-                    <a href='http://localhost/Thesis/apps/login.php' 
+                    <a href='http://localhost/Thesis/auth/login.php' 
                        style='background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;'>
                         View in Dashboard
                     </a>
@@ -228,7 +228,7 @@ class Email {
                 <p>Please be on time and prepared for the defense session.</p>
                 
                 <p style='margin-top: 30px;'>
-                    <a href='http://localhost/Thesis/apps/login.php' 
+                    <a href='http://localhost/Thesis/auth/login.php' 
                        style='background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;'>
                         View in Dashboard
                     </a>
@@ -289,3 +289,4 @@ class Email {
     }
 }
 ?>
+

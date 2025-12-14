@@ -1,17 +1,17 @@
 <?php
-// File: /THESIS/panelist/notifications.php
+// File: /THESIS/app/notifications.php
 session_start();
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../classes/Notification.php';
 
-if (!isset($_SESSION['panelist_id'])) {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
     header("Location: ../auth/login.php");
     exit;
 }
 
 $notification = new Notification();
-$userId = $_SESSION['panelist_id'];
-$userType = 'panelist';
+$userId = $_SESSION['user_id'];
+$userType = 'admin';
 
 // Handle AJAX requests
 if (isset($_GET['ajax'])) {
@@ -39,20 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Fetch notifications
 $notifications = $notification->getAll($userId, $userType);
 $unreadCount = $notification->getUnreadCount($userId, $userType);
-
-// Get panelist name
-$db = new Database();
-$conn = $db->connect();
-$stmt = $conn->prepare("SELECT first_name, last_name FROM panelist WHERE panelist_id = ?");
-$stmt->execute([$userId]);
-$panelist = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notifications - Panelist Dashboard</title>
+<title>Notifications - Admin Dashboard</title>
 <script src="/Thesis/assets/js/tailwind.js"></script>
 <script src="/Thesis/assets/js/lucide.min.js"></script>
 <style>
@@ -64,55 +57,43 @@ $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
     animation: slideIn 0.3s ease-out;
 }
 .unread {
-    background: linear-gradient(to right, #f0fdf4, #dcfce7);
-    border-left: 4px solid #10b981;
+    background: linear-gradient(to right, #eff6ff, #dbeafe);
+    border-left: 4px solid #3b82f6;
 }
 </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+<body class="bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 min-h-screen flex">
+<?php include 'sidebar.php'; ?>
 
-<!-- Navigation -->
-<nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center gap-3">
-        <i data-lucide="bell" class="w-7 h-7"></i>
-        <div>
-          <h1 class="font-bold text-lg">Notifications</h1>
-          <p class="text-xs text-blue-100"><?= htmlspecialchars($panelist['first_name'] . ' ' . $panelist['last_name']) ?></p>
-        </div>
-      </div>
-      <a href="dashboard.php" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg flex items-center gap-2 transition backdrop-blur-sm">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-        <span class="hidden sm:inline">Back to Dashboard</span>
-      </a>
-    </div>
-  </div>
-</nav>
-
-<div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+<main class="flex-1 ml-64 p-8">
+<div class="max-w-5xl mx-auto">
     <!-- Header -->
-    <div class="mb-6">
-        <div class="flex items-center justify-between">
-            <h2 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                Your Notifications
-                <?php if ($unreadCount > 0): ?>
-                    <span class="px-3 py-1 bg-green-500 text-white text-sm font-bold rounded-full">
-                        <?= $unreadCount ?> new
-                    </span>
-                <?php endif; ?>
-            </h2>
-            
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold mb-2 flex items-center gap-3 text-gray-800">
+            <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">
+                <i data-lucide="bell" class="w-8 h-8 text-white"></i>
+            </div>
+            Notifications
             <?php if ($unreadCount > 0): ?>
-            <form method="POST" class="inline">
-                <button type="submit" name="mark_all_read" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center gap-2 transition shadow-md">
-                    <i data-lucide="check-check" class="w-4 h-4"></i>
-                    Mark All as Read
-                </button>
-            </form>
+                <span class="px-4 py-2 bg-red-500 text-white text-lg font-bold rounded-full">
+                    <?= $unreadCount ?> new
+                </span>
             <?php endif; ?>
-        </div>
+        </h1>
+        <p class="text-gray-600 ml-16">Stay updated with system activities and panelist updates</p>
     </div>
+
+    <!-- Actions -->
+    <?php if ($unreadCount > 0): ?>
+    <div class="mb-6 flex gap-3">
+        <form method="POST" class="inline">
+            <button type="submit" name="mark_all_read" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition">
+                <i data-lucide="check-check" class="w-4 h-4"></i>
+                Mark All as Read
+            </button>
+        </form>
+    </div>
+    <?php endif; ?>
 
     <!-- Notifications List -->
     <div class="space-y-3">
@@ -131,11 +112,11 @@ $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                 $iconClass = 'text-blue-600';
                                 $icon = 'bell';
-                                if ($notif['type'] === 'assignment') {
-                                    $icon = 'user-check';
+                                if ($notif['type'] === 'availability_update') {
+                                    $icon = 'calendar-clock';
                                     $iconClass = 'text-green-600';
-                                } elseif ($notif['type'] === 'schedule') {
-                                    $icon = 'calendar';
+                                } elseif ($notif['type'] === 'assignment') {
+                                    $icon = 'user-check';
                                     $iconClass = 'text-purple-600';
                                 }
                                 ?>
@@ -144,29 +125,21 @@ $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
                                 </div>
                                 <h3 class="font-bold text-gray-800"><?= htmlspecialchars($notif['title']) ?></h3>
                                 <?php if (!$notif['is_read']): ?>
-                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">NEW</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">NEW</span>
                                 <?php endif; ?>
                             </div>
-                            <p class="text-gray-600 text-sm mb-2 ml-12 leading-relaxed"><?= htmlspecialchars($notif['message']) ?></p>
-                            <div class="flex items-center gap-4 ml-12">
-                                <p class="text-xs text-gray-400 flex items-center gap-1">
-                                    <i data-lucide="clock" class="w-3 h-3"></i>
-                                    <?= date('F j, Y g:i A', strtotime($notif['created_at'])) ?>
-                                </p>
-                                <?php if ($notif['type'] === 'assignment' && $notif['related_id']): ?>
-                                    <a href="viewAssignment.php?group_id=<?= $notif['related_id'] ?>" class="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
-                                        <i data-lucide="external-link" class="w-3 h-3"></i>
-                                        View Details
-                                    </a>
-                                <?php endif; ?>
-                            </div>
+                            <p class="text-gray-600 text-sm mb-2 ml-12"><?= htmlspecialchars($notif['message']) ?></p>
+                            <p class="text-xs text-gray-400 ml-12">
+                                <i data-lucide="clock" class="w-3 h-3 inline"></i>
+                                <?= date('F j, Y g:i A', strtotime($notif['created_at'])) ?>
+                            </p>
                         </div>
                         
                         <div class="flex gap-2 ml-4">
                             <?php if (!$notif['is_read']): ?>
                                 <form method="POST" class="inline">
                                     <input type="hidden" name="notification_id" value="<?= $notif['notification_id'] ?>">
-                                    <button type="submit" name="mark_read" class="text-green-600 hover:text-green-800 p-2 hover:bg-green-50 rounded-lg transition" title="Mark as read">
+                                    <button type="submit" name="mark_read" class="text-blue-600 hover:text-blue-800 p-2 hover:bg-blue-50 rounded-lg transition" title="Mark as read">
                                         <i data-lucide="check" class="w-5 h-5"></i>
                                     </button>
                                 </form>
@@ -184,6 +157,7 @@ $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 </div>
+</main>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -192,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
 

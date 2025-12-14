@@ -1,0 +1,174 @@
+﻿
+
+=== DATABASE STRUCTURE ANALYSIS ===
+
+TABLE: admin
+--------------------------------------------------
+  - id (int(11)) [PK]
+  - name (varchar(100))
+  - email (varchar(100))
+  - password (varchar(255))
+
+TABLE: assignment
+--------------------------------------------------
+  - assignment_id (int(11)) [PK]
+  - group_id (int(11)) [FK?]
+  - panelist_id (int(11)) [FK?]
+  - schedule_id (int(11)) [FK?]
+  - role (enum('Chair','Critic','Member'))
+  - assigned_date (timestamp)
+  FOREIGN KEYS:
+    - group_id -> thesis_group.group_id
+    - panelist_id -> panelist.panelist_id
+    - schedule_id -> schedule.schedule_id
+    - schedule_id -> schedule.schedule_id
+
+TABLE: audit_log
+--------------------------------------------------
+  - log_id (int(11)) [PK]
+  - user_id (int(11)) [FK?]
+  - user_role (enum('Admin','Panelist'))
+  - action (varchar(100))
+  - table_name (varchar(50))
+  - record_id (int(11))
+  - details (text)
+  - ip_address (varchar(45))
+  - created_at (timestamp) [FK?]
+
+TABLE: availability
+--------------------------------------------------
+  - availability_id (int(11)) [PK]
+  - panelist_id (int(11)) [FK?]
+  - day (varchar(20)) [FK?]
+  - start_time (time)
+  - end_time (time)
+  FOREIGN KEYS:
+    - panelist_id -> panelist.panelist_id
+
+TABLE: email_logs
+--------------------------------------------------
+  - log_id (int(11)) [PK]
+  - recipient_email (varchar(255))
+  - subject (varchar(255))
+  - message (text)
+  - status (enum('sent','failed')) [FK?]
+  - error_message (text)
+  - sent_at (timestamp) [FK?]
+
+TABLE: evaluation
+--------------------------------------------------
+  - evaluation_id (int(11)) [PK]
+  - group_id (int(11)) [FK?]
+  - panelist_id (int(11)) [FK?]
+  - content_score (int(11))
+  - presentation_score (int(11))
+  - defense_score (int(11))
+  - overall_score (decimal(5,2))
+  - comments (text)
+  - evaluated_at (timestamp)
+  FOREIGN KEYS:
+    - group_id -> thesis_group.group_id
+    - panelist_id -> faculty.panelist_id
+
+TABLE: faculty
+--------------------------------------------------
+  - panelist_id (int(11)) [PK]
+  - first_name (varchar(55))
+  - last_name (varchar(55))
+  - email (varchar(55))
+  - department (varchar(55))
+  - expertise (varchar(55))
+  - Date (timestamp)
+  - role (enum('faculty','panelist','admin'))
+  - status (enum('active','inactive'))
+
+TABLE: notifications
+--------------------------------------------------
+  - notification_id (int(11)) [PK]
+  - user_id (int(11)) [FK?]
+  - user_type (enum('admin','panelist','student'))
+  - title (varchar(255))
+  - message (text)
+  - link (varchar(255))
+  - type (enum('assignment','schedule','evaluation','reminder','general','availability_update'))
+  - is_read (tinyint(1))
+  - created_at (timestamp) [FK?]
+  - related_id (int(11))
+
+TABLE: panelist
+--------------------------------------------------
+  - panelist_id (int(11)) [PK]
+  - first_name (varchar(55))
+  - last_name (varchar(55))
+  - email (varchar(55))
+  - username (varchar(50))
+  - password (varchar(255))
+  - role (enum('Panel','Admin'))
+  - designation (varchar(55))
+  - contact_number (varchar(20))
+  - status (enum('pending','active','inactive')) [FK?]
+  - department (varchar(100))
+  - expertise (varchar(100))
+  - created_at (timestamp)
+
+TABLE: rooms
+--------------------------------------------------
+  - room_id (int(11)) [PK]
+  - name (varchar(100))
+  - mode (enum('online','physical'))
+  - location_details (text)
+  - capacity (int(11))
+  - is_available (tinyint(1))
+
+TABLE: schedule
+--------------------------------------------------
+  - schedule_id (int(11)) [PK]
+  - group_id (int(11)) [FK?]
+  - date (date) [FK?]
+  - time (time)
+  - end_time (time)
+  - room_id (int(11))
+  - defense_type (varchar(50))
+  - venue (varchar(100))
+  - status (enum('Pending','Confirmed','Done'))
+  - room (varchar(100))
+  - mode (enum('online','face-to-face'))
+  - created_at (date)
+  FOREIGN KEYS:
+    - group_id -> thesis_group.group_id
+
+TABLE: system_settings
+--------------------------------------------------
+  - setting_id (int(11)) [PK]
+  - setting_key (varchar(100))
+  - setting_value (text)
+  - setting_description (text)
+  - updated_at (timestamp)
+
+TABLE: thesis
+--------------------------------------------------
+  - group_id (int(11)) [PK]
+  - title (varchar(255))
+  - abstract (text)
+  - leader_name (varchar(255))
+  - course (varchar(50))
+  - status (varchar(50))
+  - adviser_id (int(11))
+
+TABLE: thesis_group
+--------------------------------------------------
+  - group_id (int(11)) [PK]
+  - created_at (datetime)
+  - title (varchar(255))
+  - leader_name (varchar(100))
+  - members (text)
+  - course (varchar(100))
+  - status (enum('For Defense','Defended','Pending'))
+
+
+=== POTENTIAL MISSING FOREIGN KEYS ===
+MISSING: thesis.group_id -> thesis_group.group_id
+MISSING: thesis.adviser_id -> panelist.panelist_id
+MISSING: notifications.user_id -> panelist.panelist_id
+
+=== DONE ===

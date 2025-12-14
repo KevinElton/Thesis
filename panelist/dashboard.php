@@ -1,11 +1,13 @@
 <?php
-session_start();
-require_once __DIR__ . '/../classes/database.php';
+require_once __DIR__ . '/../includes/security.php';
+require_once __DIR__ . '/../config/database.php';
 
-if (!isset($_SESSION['panelist_id'])) {
-    header("Location: ../app/login.php");
-    exit;
-}
+// Initialize secure session
+initSecureSession();
+setSecurityHeaders();
+
+// Require panelist authentication
+requireAuth('Panelist');
 
 $db = new Database();
 $conn = $db->connect();
@@ -58,8 +60,8 @@ $upcoming_defenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panelist Dashboard</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="/Thesis/assets/js/tailwind.js"></script>
+<script src="/Thesis/assets/js/lucide.min.js"></script>
 <style>
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -97,7 +99,7 @@ $upcoming_defenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <i data-lucide="calendar-clock" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Manage Availability</span>
         </a>
-        <a href="../app/logout.php" class="bg-red-500/80 hover:bg-red-600 px-4 py-2 rounded-lg flex items-center gap-2 transition">
+        <a href="../auth/logout.php" class="bg-red-500/80 hover:bg-red-600 px-4 py-2 rounded-lg flex items-center gap-2 transition">
           <i data-lucide="log-out" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Logout</span>
         </a>
@@ -307,3 +309,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
+
+

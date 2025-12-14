@@ -1,12 +1,12 @@
 <?php
 // File: /THESIS/panelist/update_availability.php
 session_start();
-require_once __DIR__ . '/../classes/database.php';
+require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../classes/audit.php';
 require_once __DIR__ . '/../classes/Notification.php';
 
 if (!isset($_SESSION['panelist_id'])) {
-    header("Location: ../app/login.php");
+    header("Location: ../auth/login.php");
     exit;
 }
 
@@ -124,8 +124,8 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Update Availability - Panelist Dashboard</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="/Thesis/assets/js/tailwind.js"></script>
+<script src="/Thesis/assets/js/lucide.min.js"></script>
 <style>
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(-10px); }
@@ -332,3 +332,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
+
+

@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once __DIR__ . '/../classes/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 if (!isset($_SESSION['panelist_id'])) {
-    header("Location: ../app/login.php");
+    header("Location: ../auth/login.php");
     exit;
 }
 
@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8">
 <title>Update Availability</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="/Thesis/assets/js/tailwind.js"></script>
+<script src="/Thesis/assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 <nav class="bg-green-600 text-white p-4 flex justify-between items-center shadow-md">
@@ -84,3 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>lucide.createIcons();</script>
 </body>
 </html>
+
+
+
+

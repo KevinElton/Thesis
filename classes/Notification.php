@@ -1,6 +1,6 @@
 <?php
 // File: /THESIS/classes/Notification.php
-require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/Mailer.php';
 
 class Notification {
@@ -208,7 +208,7 @@ class Notification {
                 </p>
                 
                 <div style='text-align: center; margin-top: 30px;'>
-                    <a href='http://localhost/THESIS/app/assignPanel.php' 
+                    <a href='http://localhost/Thesis/admin/schedules/assign.php' 
                        style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                               color: white; 
                               padding: 12px 30px; 
@@ -266,7 +266,7 @@ class Notification {
                 </div>
                 
                 <div style='text-align: center; margin-top: 30px;'>
-                    <a href='http://localhost/THESIS/panelist/viewAssignment.php' 
+                    <a href='http://localhost/Thesis/panelist/viewAssignment.php' 
                        style='background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); 
                               color: white; 
                               padding: 12px 30px; 
@@ -287,3 +287,4 @@ class Notification {
         ";
     }
 }
+

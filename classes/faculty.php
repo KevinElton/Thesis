@@ -1,6 +1,6 @@
 <?php
 // classes/faculty.php
-require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 class Faculty {
     public $panelist_id;
@@ -18,9 +18,7 @@ class Faculty {
         $this->db = new Database();
     }
 
-    // =================================================================
-    // NEW: Panelist Self-Registration (Status: pending)
-    // =================================================================
+
 
     /**
     * Handles the public self-registration for a new panelist.
@@ -109,10 +107,6 @@ class Faculty {
     }
 
 
-    // =================================================================
-    // NEW: Admin Approval/Rejection Methods (Consolidated)
-    // Now interacts with both tables for consistency
-    // =================================================================
 
     /**
     * Retrieves all faculty members with 'pending' status (awaiting approval).
@@ -687,4 +681,6 @@ class Faculty {
         }
     }
 }
+
+
 

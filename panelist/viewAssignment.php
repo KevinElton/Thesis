@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once __DIR__ . '/../classes/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 if (!isset($_SESSION['panelist_id'])) {
-    header("Location: ../app/login.php");
+    header("Location: ../auth/login.php");
     exit;
 }
 
@@ -67,8 +67,8 @@ $panel_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
 <meta charset="UTF-8">
 <title>Assignment Details</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="/Thesis/assets/js/tailwind.js"></script>
+<script src="/Thesis/assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
@@ -253,3 +253,6 @@ $panel_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>lucide.createIcons();</script>
 </body>
 </html>
+
+
+
