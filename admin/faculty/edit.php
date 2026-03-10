@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Faculty</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <form action="" method="POST" class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md space-y-4">

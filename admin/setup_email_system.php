@@ -14,12 +14,12 @@ echo "<!DOCTYPE html>
 <head>
     <meta charset='UTF-8'>
     <title>Setup Email System</title>
-    <script src='/Thesis/assets/js/tailwind.js'></script>
+    <script src='../assets/js/tailwind.js'></script>
 </head>
 <body class='bg-gray-100 p-8'>
     <div class='max-w-4xl mx-auto'>
         <div class='bg-white rounded-lg shadow-lg p-8'>
-            <h1 class='text-3xl font-bold mb-6 text-blue-600'>📧 Email System Setup</h1>";
+            <h1 class='text-3xl font-bold mb-6 text-blue-600'>ðŸ“§ Email System Setup</h1>";
 
 try {
     // Create email_logs table
@@ -34,7 +34,7 @@ try {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
     
     echo "<div class='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4'>
-            ✅ <strong>Success:</strong> email_logs table created!
+            âœ… <strong>Success:</strong> email_logs table created!
           </div>";
 
     // Create notifications table if not exists
@@ -51,7 +51,7 @@ try {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
     
     echo "<div class='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4'>
-            ✅ <strong>Success:</strong> notifications table created!
+            âœ… <strong>Success:</strong> notifications table created!
           </div>";
 
     // Check if admin table exists
@@ -71,7 +71,7 @@ try {
         $stmt->execute(['admin', password_hash('admin123', PASSWORD_DEFAULT), 'standinkevin30@gmail.com', 'System Admin']);
         
         echo "<div class='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4'>
-                ✅ <strong>Success:</strong> admin table created with default admin!
+                âœ… <strong>Success:</strong> admin table created with default admin!
               </div>";
     } else {
         // Check if email column exists
@@ -79,7 +79,7 @@ try {
         if (!$checkColumn) {
             $conn->exec("ALTER TABLE admin ADD COLUMN email VARCHAR(255) DEFAULT 'standinkevin30@gmail.com'");
             echo "<div class='bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4'>
-                    ⚠️ <strong>Updated:</strong> Added email column to admin table!
+                    âš ï¸ <strong>Updated:</strong> Added email column to admin table!
                   </div>";
         }
         
@@ -87,22 +87,22 @@ try {
         $conn->exec("UPDATE admin SET email = 'standinkevin30@gmail.com' WHERE email IS NULL OR email = ''");
         
         echo "<div class='bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4'>
-                ℹ️ <strong>Info:</strong> Admin table already exists!
+                â„¹ï¸ <strong>Info:</strong> Admin table already exists!
               </div>";
     }
 
     echo "<div class='mt-8 p-4 bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500 rounded'>
-            <h3 class='font-bold text-green-800 mb-2'>✅ Email System Ready!</h3>
+            <h3 class='font-bold text-green-800 mb-2'>âœ… Email System Ready!</h3>
             <p class='text-green-700 mb-3'>The email notification system is now fully configured.</p>
             <ul class='text-sm text-gray-700 space-y-2'>
-                <li>✓ <strong>When a panelist updates availability:</strong> Admin will receive an email</li>
-                <li>✓ <strong>When admin assigns a panel:</strong> Panelists will receive emails with schedule details</li>
-                <li>✓ <strong>Emails are logged:</strong> Check the email_logs table for history</li>
+                <li>âœ“ <strong>When a panelist updates availability:</strong> Admin will receive an email</li>
+                <li>âœ“ <strong>When admin assigns a panel:</strong> Panelists will receive emails with schedule details</li>
+                <li>âœ“ <strong>Emails are logged:</strong> Check the email_logs table for history</li>
             </ul>
           </div>";
 
     echo "<div class='mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded'>
-            <h3 class='font-bold text-yellow-800 mb-2'>⚠️ Important Configuration</h3>
+            <h3 class='font-bold text-yellow-800 mb-2'>âš ï¸ Important Configuration</h3>
             <p class='text-yellow-700 mb-2'>Emails are being sent to: <strong>standinkevin30@gmail.com</strong></p>
             <p class='text-sm text-yellow-600'>If you want to change this, update the email in the admin table or Mailer.php</p>
           </div>";
@@ -115,13 +115,13 @@ try {
 
 echo "      <div class='mt-6 flex gap-4 flex-wrap'>
                 <a href='dashboard.php' class='bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition'>
-                    🏠 Go to Dashboard
+                    ðŸ  Go to Dashboard
                 </a>
                 <a href='activity_monitor.php' class='bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition'>
-                    📊 Activity Monitor
+                    ðŸ“Š Activity Monitor
                 </a>
                 <a href='../auth/logout.php' class='bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition'>
-                    🚪 Logout
+                    ðŸšª Logout
                 </a>
             </div>
         </div>

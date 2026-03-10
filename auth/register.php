@@ -97,8 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panelist Registration</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
+    <script src="../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 min-h-screen flex items-center justify-center py-8">
 
@@ -181,10 +181,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p class="text-sm text-blue-800 font-medium mb-2">Password Requirements:</p>
                 <ul class="text-xs text-blue-700 space-y-1">
-                    <li>• At least 8 characters long</li>
-                    <li>• At least one uppercase letter (A-Z)</li>
-                    <li>• At least one lowercase letter (a-z)</li>
-                    <li>• At least one number (0-9)</li>
+                    <li>â€¢ At least 8 characters long</li>
+                    <li>â€¢ At least one uppercase letter (A-Z)</li>
+                    <li>â€¢ At least one lowercase letter (a-z)</li>
+                    <li>â€¢ At least one number (0-9)</li>
                 </ul>
             </div>
 
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="mt-6 text-center text-sm text-gray-500">
-            © <?= date('Y') ?> Thesis Scheduling System. All rights reserved.
+            Â© <?= date('Y') ?> Thesis Scheduling System. All rights reserved.
         </div>
     </div>
 

@@ -64,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $gmail_user && $gmail_pass) {
         
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
-        $mail->Subject = "✅ Email Test Successful - Thesis Defense System";
+        $mail->Subject = "âœ… Email Test Successful - Thesis Defense System";
         $mail->Body = "
         <div style='font-family:Arial;padding:30px;background:linear-gradient(135deg,#10b981,#3b82f6);border-radius:15px;'>
             <div style='background:white;padding:30px;border-radius:10px;'>
-                <h1 style='color:#10b981;margin:0 0 20px 0;'>🎉 Email Configuration Successful!</h1>
+                <h1 style='color:#10b981;margin:0 0 20px 0;'>ðŸŽ‰ Email Configuration Successful!</h1>
                 <p style='color:#333;font-size:16px;'>Your <strong>Thesis Defense Scheduling System</strong> can now send emails.</p>
                 <p style='color:#666;'>You will receive notifications when:</p>
                 <ul style='color:#555;'>
@@ -97,34 +97,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $gmail_user && $gmail_pass) {
 <head>
     <meta charset="UTF-8">
     <title>Setup Email</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen p-8">
     <div class="max-w-2xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-            <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">📧 Email Setup</h1>
+            <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">ðŸ“§ Email Setup</h1>
             <p class="text-center text-gray-600 mb-6">Configure your Gmail to send email notifications</p>
             
             <?php if ($result === 'success'): ?>
             <div class="bg-green-100 border-2 border-green-500 text-green-800 p-6 rounded-xl text-center mb-6">
-                <h2 class="text-2xl font-bold mb-2">✅ SUCCESS!</h2>
+                <h2 class="text-2xl font-bold mb-2">âœ… SUCCESS!</h2>
                 <p>Email sent to <strong><?= htmlspecialchars($to_email) ?></strong></p>
                 <p class="text-sm mt-2">Your email configuration has been saved!</p>
             </div>
             <?php elseif ($result): ?>
             <div class="bg-red-100 border-2 border-red-500 text-red-800 p-4 rounded-xl mb-6">
-                <strong>❌ Error:</strong> <?= htmlspecialchars($result) ?>
+                <strong>âŒ Error:</strong> <?= htmlspecialchars($result) ?>
             </div>
             <?php endif; ?>
             
             <!-- Instructions -->
             <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
-                <h3 class="font-bold text-blue-800 mb-2">📋 How to get your Gmail App Password:</h3>
+                <h3 class="font-bold text-blue-800 mb-2">ðŸ“‹ How to get your Gmail App Password:</h3>
                 <ol class="text-sm text-blue-700 space-y-1 list-decimal ml-4">
                     <li>Go to <a href="https://myaccount.google.com/security" target="_blank" class="underline font-bold">Google Account Security</a></li>
                     <li>Enable <strong>2-Step Verification</strong> if not enabled</li>
                     <li>Go to <a href="https://myaccount.google.com/apppasswords" target="_blank" class="underline font-bold">App Passwords</a></li>
-                    <li>Click <strong>"Select app"</strong> → Choose <strong>"Mail"</strong></li>
+                    <li>Click <strong>"Select app"</strong> â†’ Choose <strong>"Mail"</strong></li>
                     <li>Click <strong>"Generate"</strong></li>
                     <li>Copy the <strong>16-character password</strong></li>
                 </ol>
@@ -153,13 +153,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $gmail_user && $gmail_pass) {
                 
                 <button type="submit" 
                         class="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:from-green-700 hover:to-blue-700 transition shadow-lg">
-                    📨 Test & Save Configuration
+                    ðŸ“¨ Test & Save Configuration
                 </button>
             </form>
             
             <div class="mt-6 flex gap-4">
                 <a href="dashboard.php" class="flex-1 text-center bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200">
-                    ← Dashboard
+                    â† Dashboard
                 </a>
             </div>
         </div>

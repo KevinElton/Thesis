@@ -46,8 +46,8 @@ $unreadCount = $notification->getUnreadCount($userId, $userType);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notifications - Admin Dashboard</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 <style>
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-20px); }

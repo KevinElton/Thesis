@@ -67,8 +67,8 @@ $panel_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
 <meta charset="UTF-8">
 <title>Assignment Details</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 

@@ -91,8 +91,8 @@ try {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Activity Monitor - Admin Dashboard</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 <style>
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -195,9 +195,9 @@ try {
                             <td class="px-4 py-3 text-gray-600"><?= htmlspecialchars($account['department'] ?? 'N/A') ?></td>
                             <td class="px-4 py-3">
                                 <?php if ($account['status'] === 'pending'): ?>
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">⏳ Pending</span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">â³ Pending</span>
                                 <?php elseif ($account['status'] === 'active'): ?>
-                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">✓ Active</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">âœ“ Active</span>
                                 <?php else: ?>
                                     <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold"><?= htmlspecialchars($account['status']) ?></span>
                                 <?php endif; ?>
@@ -305,7 +305,7 @@ try {
                     <div class="flex-1">
                         <div class="flex items-center gap-2 mb-1">
                             <h4 class="font-semibold text-gray-800"><?= htmlspecialchars($notif['title'] ?? 'Notification') ?></h4>
-                            <span class="text-xs text-gray-400">→</span>
+                            <span class="text-xs text-gray-400">â†’</span>
                             <span class="text-sm text-gray-600"><?= htmlspecialchars($notif['recipient_name'] ?? 'User') ?></span>
                         </div>
                         <p class="text-sm text-gray-600"><?= htmlspecialchars($notif['message'] ?? '') ?></p>

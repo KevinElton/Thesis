@@ -380,6 +380,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const badge = document.getElementById('notificationBadge');
     const markAllReadBtn = document.getElementById('markAllRead');
 
+    // Dynamically determine base path for API calls
+    const pathParts = window.location.pathname.split('/');
+    const thesisIndex = pathParts.findIndex(p => p.toLowerCase() === 'thesis');
+    const basePath = thesisIndex !== -1 ? pathParts.slice(0, thesisIndex + 1).join('/') : '';
+
     // Toggle dropdown with animation
     bell.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -404,8 +409,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load notifications
     function loadNotifications() {
         // Determine the correct API path
-        const currentPath = window.location.pathname;
-        let apiPath = '/Thesis/api/get_notifications.php';
+        let apiPath = basePath + '/api/get_notifications.php';
         
         fetch(apiPath)
             .then(response => response.json())
@@ -487,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mark notification as read
     function markAsRead(notifId) {
-        fetch('/Thesis/api/mark_notification_read.php', {
+        fetch(basePath + '/api/mark_notification_read.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ notification_id: notifId })
@@ -503,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mark all as read
     markAllReadBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        fetch('/Thesis/api/mark_all_read.php', {
+        fetch(basePath + '/api/mark_all_read.php', {
             method: 'POST'
         })
         .then(response => response.json())
@@ -536,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Auto-refresh every 30 seconds
     setInterval(function() {
-        fetch('/Thesis/api/get_notifications.php')
+        fetch(basePath + '/api/get_notifications.php')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

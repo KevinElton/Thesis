@@ -19,18 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $result = Mailer::sendDebug(
         $to_email,
-        "✅ Test Email - Thesis Defense System",
+        "âœ… Test Email - Thesis Defense System",
         "
         <div style='font-family:Arial;padding:30px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:15px;'>
             <div style='background:white;padding:30px;border-radius:10px;'>
-                <h1 style='color:#667eea;margin:0 0 20px 0;'>🎉 Email System Working!</h1>
+                <h1 style='color:#667eea;margin:0 0 20px 0;'>ðŸŽ‰ Email System Working!</h1>
                 <p style='color:#333;font-size:16px;'>
                     This is a test email from your <strong>Thesis Defense Scheduling System</strong>.
                 </p>
                 <p style='color:#666;'>If you received this, your email notifications are configured correctly!</p>
                 <div style='background:#f0f4ff;padding:15px;border-radius:8px;margin-top:20px;'>
                     <p style='margin:0;color:#3b82f6;font-size:14px;'>
-                        📧 Sent at: " . date('F j, Y g:i:s A') . "
+                        ðŸ“§ Sent at: " . date('F j, Y g:i:s A') . "
                     </p>
                 </div>
             </div>
@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     echo "\n\n";
     if ($result === true) {
-        echo "✅ SUCCESS! Email sent successfully!\n";
+        echo "âœ… SUCCESS! Email sent successfully!\n";
     } else {
-        echo "❌ FAILED: {$result}\n";
+        echo "âŒ FAILED: {$result}\n";
     }
     echo "</pre>";
 }
@@ -52,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Test Email</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen p-8">
     <div class="max-w-2xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-            <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">📧 Email Test</h1>
+            <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">ðŸ“§ Email Test</h1>
             <p class="text-center text-gray-600 mb-8">Send a test email to verify the system works</p>
             
             <form method="POST" class="space-y-6">
@@ -70,23 +70,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 <button type="submit" 
                         class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg">
-                    📨 Send Test Email
+                    ðŸ“¨ Send Test Email
                 </button>
             </form>
             
             <?php if ($result === true): ?>
             <div class="mt-6 bg-green-100 border-2 border-green-500 text-green-800 p-4 rounded-xl text-center">
-                <strong>✅ SUCCESS!</strong> Check your inbox (and spam folder) at <?= htmlspecialchars($to_email) ?>
+                <strong>âœ… SUCCESS!</strong> Check your inbox (and spam folder) at <?= htmlspecialchars($to_email) ?>
             </div>
             <?php elseif ($result !== null): ?>
             <div class="mt-6 bg-red-100 border-2 border-red-500 text-red-800 p-4 rounded-xl">
-                <strong>❌ Error:</strong> <?= htmlspecialchars($result) ?>
+                <strong>âŒ Error:</strong> <?= htmlspecialchars($result) ?>
             </div>
             <?php endif; ?>
             
             <div class="mt-8 flex gap-4">
                 <a href="dashboard.php" class="flex-1 text-center bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200">
-                    ← Dashboard
+                    â† Dashboard
                 </a>
                 <a href="activity_monitor.php" class="flex-1 text-center bg-purple-100 text-purple-700 py-3 rounded-xl font-semibold hover:bg-purple-200">
                     Activity Monitor

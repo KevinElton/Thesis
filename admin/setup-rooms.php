@@ -15,26 +15,26 @@ echo "<!DOCTYPE html>
 <head>
     <meta charset='UTF-8'>
     <title>Setup Rooms Table</title>
-    <script src='/Thesis/assets/js/tailwind.js'></script>
+    <script src='../assets/js/tailwind.js'></script>
 </head>
 <body class='bg-gray-100 p-8'>
     
     <!-- TOP BAR WITH LOGOUT -->
     <div class='max-w-4xl mx-auto mb-4 flex justify-between items-center bg-blue-600 text-white p-4 rounded-lg'>
-        <span class='font-bold'>🔧 Setup Utility</span>
+        <span class='font-bold'>ðŸ”§ Setup Utility</span>
         <div class='flex gap-3'>
             <a href='dashboard.php' class='bg-white text-blue-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-100'>
-                🏠 Dashboard
+                ðŸ  Dashboard
             </a>
             <a href='../auth/logout.php' class='bg-red-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-600'>
-                🚪 LOGOUT
+                ðŸšª LOGOUT
             </a>
         </div>
     </div>
     
     <div class='max-w-4xl mx-auto'>
         <div class='bg-white rounded-lg shadow-lg p-8'>
-            <h1 class='text-3xl font-bold mb-6 text-blue-600'>🔧 Database Setup: Rooms Table</h1>";
+            <h1 class='text-3xl font-bold mb-6 text-blue-600'>ðŸ”§ Database Setup: Rooms Table</h1>";
 
 try {
     // Create rooms table
@@ -50,7 +50,7 @@ try {
     
     $conn->exec($sql);
     echo "<div class='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4'>
-            ✅ <strong>Success:</strong> Rooms table created successfully!
+            âœ… <strong>Success:</strong> Rooms table created successfully!
           </div>";
     
     // Insert sample rooms
@@ -88,7 +88,7 @@ try {
     $stmt = $conn->query("SELECT * FROM rooms ORDER BY room_id");
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    echo "<h2 class='text-2xl font-bold mb-4 text-gray-800'>📋 Created Rooms:</h2>
+    echo "<h2 class='text-2xl font-bold mb-4 text-gray-800'>ðŸ“‹ Created Rooms:</h2>
           <div class='overflow-x-auto'>
             <table class='min-w-full border border-gray-300'>
                 <thead class='bg-blue-600 text-white'>
@@ -118,7 +118,7 @@ try {
     echo "</tbody></table></div>";
     
     echo "<div class='mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-400'>
-            <h3 class='font-bold text-yellow-800 mb-2'>⚠️ Important:</h3>
+            <h3 class='font-bold text-yellow-800 mb-2'>âš ï¸ Important:</h3>
             <ul class='text-yellow-700 space-y-1'>
                 <li>Rooms table has been created successfully</li>
                 <li> Sample rooms have been added</li>
@@ -135,13 +135,13 @@ try {
 
 echo "      <div class='mt-6 flex gap-4 flex-wrap'>
                 <a href='dashboard.php' class='bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition'>
-                    🏠 Go to Dashboard
+                    ðŸ  Go to Dashboard
                 </a>
                 <a href='schedules/manage.php' class='bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition'>
-                    📅 Manage Schedules
+                    ðŸ“… Manage Schedules
                 </a>
                 <a href='../auth/logout.php' class='bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition'>
-                    🚪 Logout
+                    ðŸšª Logout
                 </a>
             </div>
         </div>

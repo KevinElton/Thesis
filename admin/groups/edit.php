@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Thesis Group</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
+    <script src="../../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
@@ -182,9 +182,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h4 class="font-semibold text-blue-800">Important Notes</h4>
         </div>
         <ul class="text-sm text-blue-700 space-y-1 ml-7">
-            <li>• Changes will affect all related schedules and assignments</li>
-            <li>• The adviser cannot be a panelist in this group's defense</li>
-            <li>• Make sure to update the status as the thesis progresses</li>
+            <li>â€¢ Changes will affect all related schedules and assignments</li>
+            <li>â€¢ The adviser cannot be a panelist in this group's defense</li>
+            <li>â€¢ Make sure to update the status as the thesis progresses</li>
         </ul>
     </div>
 </div>

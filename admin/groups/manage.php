@@ -216,8 +216,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thesis Groups Management</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
+    <script src="../../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 flex min-h-screen">
 

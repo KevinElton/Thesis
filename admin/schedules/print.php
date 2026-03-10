@@ -73,8 +73,8 @@ foreach ($schedules as &$schedule) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defense Schedule Report</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
+    <script src="../../assets/js/lucide.min.js"></script>
     <style>
         @media print {
             .no-print {

@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $audit = new Audit();
                 $audit->logAction($panelist_id, 'Panelist', 'Add Availability', 'availability', $conn->lastInsertId(), "Added availability: $day $start_time - $end_time");
                 
-                // ✅ NOTIFY ADMIN - In-system + Email
+                // âœ… NOTIFY ADMIN - In-system + Email
                 try {
                     $notification = new Notification();
                     $panelistName = $panelist['first_name'] . ' ' . $panelist['last_name'];
@@ -124,8 +124,8 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Update Availability - Panelist Dashboard</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 <style>
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(-10px); }
@@ -272,7 +272,7 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                           <span class="text-sm font-semibold text-gray-800">
                             <?= date('g:i A', strtotime($slot['start_time'])) ?>
                           </span>
-                          <span class="text-gray-400">→</span>
+                          <span class="text-gray-400">â†’</span>
                           <span class="text-sm font-semibold text-gray-800">
                             <?= date('g:i A', strtotime($slot['end_time'])) ?>
                           </span>

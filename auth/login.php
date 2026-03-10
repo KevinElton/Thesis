@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Too many failed attempts. Please try again in {$minutes} minute(s).";
         } else {
             try {
-                // ✅ ADMIN LOGIN - Only use password_verify (no plain text fallback)
+                // âœ… ADMIN LOGIN - Only use password_verify (no plain text fallback)
                 $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
                 $stmt->execute([$username]);
                 $admin = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
 
-                // ✅ PANELIST LOGIN - Only active accounts, password_verify only
+                // âœ… PANELIST LOGIN - Only active accounts, password_verify only
                 $stmt = $conn->prepare("SELECT * FROM panelist WHERE (email = ? OR username = ?) AND status = 'active'");
                 $stmt->execute([$username, $username]);
                 $panelist = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -102,8 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Thesis Scheduling System</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
+    <script src="../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 min-h-screen flex items-center justify-center">
 
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="mt-6 text-center text-sm text-gray-500">
-            © <?= date('Y') ?> Thesis Scheduling System. All rights reserved.
+            Â© <?= date('Y') ?> Thesis Scheduling System. All rights reserved.
         </div>
     </div>
 

@@ -60,8 +60,8 @@ $upcoming_defenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panelist Dashboard</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 <style>
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

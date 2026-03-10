@@ -66,8 +66,8 @@ $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panelist Availability Report</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
+    <script src="../assets/js/lucide.min.js"></script>
     <style>
         @media print {
             .no-print {

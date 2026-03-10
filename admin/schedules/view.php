@@ -42,10 +42,10 @@ $hasThesisTable = tableExists($conn, 'thesis');
 
 // Informational message if rooms or end_time missing
 if (!$hasRoomsTable) {
-    $message .= '<div class="bg-yellow-50 text-yellow-800 border-l-4 border-yellow-400 p-4 mb-4 rounded">⚠️ <strong>Rooms table not found.</strong> Room selection will be disabled until you create a <code>rooms</code> table.</div>';
+    $message .= '<div class="bg-yellow-50 text-yellow-800 border-l-4 border-yellow-400 p-4 mb-4 rounded">âš ï¸ <strong>Rooms table not found.</strong> Room selection will be disabled until you create a <code>rooms</code> table.</div>';
 }
 if (!$hasEndTimeColumn) {
-    $message .= '<div class="bg-yellow-50 text-yellow-800 border-l-4 border-yellow-400 p-4 mb-4 rounded">⚠️ <strong>No <code>end_time</code> column found in <code>schedule</code> table.</strong> Overlap checks will fallback to simple time-equality checks. Consider adding an <code>end_time</code> column for accurate conflict detection.</div>';
+    $message .= '<div class="bg-yellow-50 text-yellow-800 border-l-4 border-yellow-400 p-4 mb-4 rounded">âš ï¸ <strong>No <code>end_time</code> column found in <code>schedule</code> table.</strong> Overlap checks will fallback to simple time-equality checks. Consider adding an <code>end_time</code> column for accurate conflict detection.</div>';
 }
 
 // Handle schedule creation with ENHANCED conflict checking
@@ -383,8 +383,8 @@ if (!empty($unscheduled_groups)) {
 <head>
     <meta charset="UTF-8">
     <title>Manage Schedules</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
+    <script src="../../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 flex min-h-screen">
 
@@ -411,7 +411,7 @@ if (!empty($unscheduled_groups)) {
             <p class="font-semibold text-yellow-800"><?= count($unscheduled_groups) ?> thesis groups need to be scheduled</p>
         </div>
         <button onclick="toggleModal()" class="text-yellow-700 hover:text-yellow-900 underline text-sm">
-            Schedule them now →
+            Schedule them now â†’
         </button>
     </div>
     <?php endif; ?>
@@ -536,7 +536,7 @@ if (!empty($unscheduled_groups)) {
                                 data-panel-count="<?= intval($group['panel_count'] ?? 0) ?>">
                             <?= htmlspecialchars(($group['course'] ?? '') . ' - ' . ($group['leader_name'] ?? '')) ?>
                             <?php if (isset($group_assignments[$group['group_id']]) && count($group_assignments[$group['group_id']]) > 0): ?>
-                                ✓ Panel Assigned (<?= count($group_assignments[$group['group_id']]) ?>)
+                                âœ“ Panel Assigned (<?= count($group_assignments[$group['group_id']]) ?>)
                             <?php endif; ?>
                         </option>
                     <?php endforeach; ?>
@@ -561,7 +561,7 @@ if (!empty($unscheduled_groups)) {
                     <input type="date" name="date" id="defenseDate" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>"
                            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500"
                            onchange="checkWeekend(this)">
-                    <p id="weekendWarning" class="text-xs text-red-600 mt-1 hidden">⚠️ Weekend selected</p>
+                    <p id="weekendWarning" class="text-xs text-red-600 mt-1 hidden">âš ï¸ Weekend selected</p>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Start Time *</label>

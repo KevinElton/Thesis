@@ -120,8 +120,8 @@ $stats = $statsStmt->get_result()->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Notifications - Admin Dashboard</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../assets/js/tailwind.js"></script>
+    <script src="../assets/js/lucide.min.js"></script>
     <style>
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
@@ -380,7 +380,7 @@ $stats = $statsStmt->get_result()->fetch_assoc();
                                             <p class="text-xs text-gray-400 flex items-center gap-1">
                                                 <i data-lucide="clock" class="w-3 h-3"></i>
                                                 <?= date('F j, Y g:i A', strtotime($notif['created_at'])) ?>
-                                                <span class="mx-2">•</span>
+                                                <span class="mx-2">â€¢</span>
                                                 <?= $notification->timeAgo($notif['created_at']) ?>
                                             </p>
                                         </div>

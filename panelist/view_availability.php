@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8">
 <title>Update Availability</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../assets/js/tailwind.js"></script>
+<script src="../assets/js/lucide.min.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 <nav class="bg-green-600 text-white p-4 flex justify-between items-center shadow-md">
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="text-center mb-6">
       <i data-lucide="clock" class="w-10 h-10 mx-auto text-green-600"></i>
       <h2 class="text-2xl font-semibold text-gray-800 mt-2">Set Your Availability</h2>
-      <p class="text-gray-500 text-sm mt-1">Please fill in the times when you’re available to serve as a panelist.</p>
+      <p class="text-gray-500 text-sm mt-1">Please fill in the times when youâ€™re available to serve as a panelist.</p>
     </div>
 
     <form method="POST" class="space-y-5">
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 
 <footer class="bg-gray-50 text-center py-3 text-sm text-gray-500 border-t border-gray-200">
-  © 2025 Thesis Scheduling System
+  Â© 2025 Thesis Scheduling System
 </footer>
 
 <script>lucide.createIcons();</script>

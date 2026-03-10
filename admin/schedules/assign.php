@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$group_id]);
                 $assigned_panel = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // ✅ SEND NOTIFICATIONS TO PANELISTS (In-System + Email)
+                // âœ… SEND NOTIFICATIONS TO PANELISTS (In-System + Email)
                 try {
                     $notification = new Notification();
                     
@@ -280,8 +280,8 @@ foreach ($days_of_week as $day) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assign Panel Members - Admin Dashboard</title>
-<script src="/Thesis/assets/js/tailwind.js"></script>
-<script src="/Thesis/assets/js/lucide.min.js"></script>
+<script src="../../assets/js/tailwind.js"></script>
+<script src="../../assets/js/lucide.min.js"></script>
 <style>
 @keyframes pulse {
     0%, 100% { opacity: 1; }

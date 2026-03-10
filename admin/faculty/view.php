@@ -25,8 +25,8 @@ $facultyList = $faculty->viewFaculty($filterDate);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added viewport -->
     <title>View Faculty</title>
-    <script src="/Thesis/assets/js/tailwind.js"></script>
-    <script src="/Thesis/assets/js/lucide.min.js"></script>
+    <script src="../../assets/js/tailwind.js"></script>
+    <script src="../../assets/js/lucide.min.js"></script>
     <style>
         /* Add some basic table styling improvements */
         th, td {

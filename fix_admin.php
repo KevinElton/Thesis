@@ -6,7 +6,7 @@ $conn = $db->connect();
 
 // Set a new hashed password for all admins
 $newPassword = 'Admin123';
-$hashedPassword = password_hash($newPassword, PASSWORD_ARGON2ID);
+$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
 // Update all admin passwords
 $stmt = $conn->prepare("UPDATE admin SET password = ?");
